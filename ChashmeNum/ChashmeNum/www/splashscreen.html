@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Splash Screen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/framework.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="scripts/webfont.js"></script>
+    <!--<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script>-->
+    <script type="text/javascript" src="scripts/modernizr.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        *:not(input):not(textarea) {
+            -webkit-touch-callout: none;    /* prevent callout to copy image, etc when tap to hold */
+            -webkit-text-size-adjust: none; /* prevent webkit from resizing text to fit */
+            -webkit-user-select: none;      /* prevent copy paste, to allow, change 'none' to 'text' */
+            /*-ms-touch-callout: none;*/
+            -ms-user-select: none;
+            -ms-text-size-adjust: none;
+            /*-moz-touch-callout: none;*/
+            -moz-user-select: none;
+            -moz-text-size-adjust: none;
+        }
+    </style>
+</head>
+<body>
+    <section class="w-section mobile-wrapper" style="width:100%"> 
+        <div class="page-content bg-gradient" id="main-stack"> <!--style="background-color:#25ae90;"--> 
+            <div class=" padding" style="text-align : center;">
+                <div class=""> <!--splash-logo-->
+                    <object data="images/logoCeN.svg" type="image/svg+xml" style="width: 240px;height: 240px;margin: 40px; padding:20px"></object>
+                    <!-- <div class="loading-icon splash"> 
+                        <div class="navbar-button-icon icon ion-load-d">
+                        </div>
+                    </div> -->
+                </div>
+                <div class="bottom-section padding text-centered"> 
+                    <div class="separator-big"></div>
+                    <div class="link-upper"></div>
+                    <div class="separator-bottom"></div>
+                </div>
+            </div>
+        </div>
+        <div class="page-content loading-mask" id="new-stack">
+            <div class="loading-icon">
+                <div class="navbar-button-icon icon ion-load-d"></div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/appBundle.js"></script>
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="scripts/framework.js"></script>-->
+    <!--<script type="text/javascript" src="js/scripts.js"></script>-->
+
+    <script type="text/javascript">
+        //var physicalScreenHeight = window.screen.height * window.devicePixelRatio;
+        //$(".w-section").css("height", physicalScreenHeight + "px");
+		$(document).ready(function(){
+			setInterval(function(){ 
+				//loading-icon
+				//alert("Hello"); 
+				movetoLogin();
+			}, 2000);
+		})
+		
+		function movetoLogin(){
+			$(".loading-icon").fadeOut(1000, redirectPage); 
+		}
+		function redirectPage(){
+			window.location = "login.html";
+		}
+    </script>
+</body>
+</html>
