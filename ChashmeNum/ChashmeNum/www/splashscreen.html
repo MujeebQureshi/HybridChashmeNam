@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="css/framework.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script src="scripts/webfont.js"></script>
-    <!--<script>WebFont.load({google:{families: ["Montserrat:400,700"]}}); </script>-->
     <script type="text/javascript" src="scripts/modernizr.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
@@ -24,24 +23,91 @@
             -moz-user-select: none;
             -moz-text-size-adjust: none;
         }
-    </style>
+		
+		
+		.logoAnim {
+			-webkit-transform: translateY(-100px);
+			-ms-transform: translateY(-100px);
+			-moz-transform: translateY(-100px);
+			-o-transform: translateY(-100px);
+			transform: translateY(-100px);
+			transition: all 1s ease;
+		}
+		
+		@keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		/* Firefox  16 */
+		@-moz-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		/* Safari, Chrome and Opera > 12.1 */
+		@-webkit-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		/* Internet Explorer */
+		@-ms-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+
+		/* Opera  12.1 */
+		@-o-keyframes fadein {
+			from { opacity: 0; }
+			to   { opacity: 1; }
+		}
+				
+		.loginAnim {
+
+			-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+			-moz-animation: fadein 2s; /* Firefox 16 */
+			-ms-animation: fadein 2s; /* Internet Explorer */
+			-o-animation: fadein 2s; /* Opera 12.1 */
+			animation: fadein 2s;
+			-webkit-animation-fill-mode: forwards;
+		}
+
+		    
+</style>
 </head>
 <body>
-    <section class="w-section mobile-wrapper" style="width:100%"> 
-        <div class="page-content bg-gradient" id="main-stack"> <!--style="background-color:#25ae90;"--> 
-            <div class=" padding" style="text-align : center;">
-                <div class=""> <!--splash-logo-->
-                    <object data="images/logoCeN.svg" type="image/svg+xml" style="width: 240px;height: 240px;margin: 40px; padding:20px"></object>
-                    <!-- <div class="loading-icon splash"> 
-                        <div class="navbar-button-icon icon ion-load-d">
-                        </div>
-                    </div> -->
+    <section class="w-section" style="width:100%;"> 
+        <div class="page-content bg-gradient" id="main-stack"> 
+            <div class=" padding">
+                <div class="" style="text-align : center;"> <!--splash-logo-->
+                    <object id="appLogo" data="images/logoCeN.svg" type="image/svg+xml" style="width: 240px;height: 240px; margin-top:100px; padding:20px"></object>
                 </div>
-                <div class="bottom-section padding text-centered"> 
-                    <div class="separator-big"></div>
-                    <div class="link-upper"></div>
-                    <div class="separator-bottom"></div>
-                </div>
+                <div id="loginDet" class="bottom-section padding" style="opacity:0;" > 
+					<div class="w-form"> 
+						<form id="submit-form" name="email-form" action="#" data-redirect="home.html"> 
+						<div> 
+							<label class="label-form light" for="email-field">USERNAME</label> 
+							<input class="w-input input-form light" id="email-field" type="email" name="email" value="david.smith@gmail.com" data-name="email" required="required"> 
+							<div class="separator-fields"></div>
+						</div>
+						<div> 
+							<label class="label-form light" for="email">PASSWORD</label> 
+							<div class="block-input-combined"> 
+								<input class="w-input input-form light left" id="password-field" type="password" value="password" name="password" data-name="password" required="required"><a class="right-input-link" href="forgot.html" data-load="1">Forgot Password</a>
+							</div>
+							<div class="separator-button-input"></div>
+						</div>
+						<button id="appSignIn" class="w-button action-button" type="button" value="Sign In" style="background-color:dodgerblue"> Sign In</button>
+						<div class="separator-button"></div>
+						<button id="appSignInFB" class="w-button action-button" type="button" value="Sign In" style="background-color:#314777;"><i class="icon ion-social-facebook"></i>&nbsp; Sign In with FACEBOOK</button>
+						<div class="separator-button"></div>
+						<button id="appSignInGoogle" class="w-button action-button" type="button" value="Sign In" style="background-color:#ff274a;"><i class="icon ion-social-googleplus"></i>&nbsp; Sign In with GOOGLE</button>
+						<div class="separator-button"></div>
+						<a class="link-upper" href="signup.html" data-load="1">Don't have an account? <strong class="b-link">Sign Up</strong></a> 
+						</form> 
+					</div>
+				</div>
             </div>
         </div>
         <div class="page-content loading-mask" id="new-stack">
@@ -53,16 +119,13 @@
     <script type="text/javascript" src="scripts/platformOverrides.js"></script>
     <script type="text/javascript" src="scripts/appBundle.js"></script>
     <script type="text/javascript" src="scripts/jquery.min.js"></script>
-    <!--<script type="text/javascript" src="scripts/framework.js"></script>-->
-    <!--<script type="text/javascript" src="js/scripts.js"></script>-->
-
+    
     <script type="text/javascript">
-        //var physicalScreenHeight = window.screen.height * window.devicePixelRatio;
-        //$(".w-section").css("height", physicalScreenHeight + "px");
-		$(document).ready(function(){
+        var storage = window.localStorage;
+        
+        $(document).ready(function(){
+            
 			setInterval(function(){ 
-				//loading-icon
-				//alert("Hello"); 
 				movetoLogin();
 			}, 2000);
 		})
@@ -70,9 +133,25 @@
 		function movetoLogin(){
 			$(".loading-icon").fadeOut(1000, redirectPage); 
 		}
+		
 		function redirectPage(){
-			window.location = "login.html";
+			$("#appLogo").addClass("logoAnim");
+			$("#loginDet").addClass("loginAnim");
 		}
+
+		$("#appSignIn").click(function (e) {
+		    var value = storage.getItem("userid");
+		    alert(value);
+		})
+
+		$("#appSignInFB").click(function (e) {
+		    storage.setItem("userid", $("#email-field").val());
+		})
+
+		$("#appSignInGoogle").click(function (e) {
+		    storage.removeItem("userid");
+		})
+		
     </script>
 </body>
 </html>

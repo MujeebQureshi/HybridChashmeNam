@@ -74,6 +74,8 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script> 
 <script type="text/javascript">
 	$(document).ready(function(){
+		var physicalScreenHeight = window.screen.height * window.devicePixelRatio;
+		$(".w-section").css("height", physicalScreenHeight + "px");
 		$("#loginDet").fadeIn(1000);
 	})
 </script>
